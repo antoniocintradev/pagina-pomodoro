@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="pt-BR"> 
+<head>
+  <meta charset="UTF-8" />
+  <title>Página – Pomodoro & Foco</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta
+    name="description"
+    content="Aplicativo web para controle de tempo e concentração em estudo e trabalho usando Pomodoro e outras técnicas."
+  />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body> 
+  <div class="app">
+    <header class="app-header">
+      <div>
+        <h1>Página – Pomodoro</h1>
+        <p>Foco profundo para estudo e trabalho.</p>
+      </div>
+      <button id="themeToggle" class="btn ghost" aria-label="Alternar tema claro/escuro">
+        🌙
+      </button>
+    </header>
+
+    <main class="layout">
+      <!-- Coluna Timer -->
+      <section class="card timer-card">
+        <div class="mode-selector">
+          <button class="chip chip-active" data-mode="pomodoro">Pomodoro</button>
+          <button class="chip" data-mode="52-17">52/17</button>
+          <button class="chip" data-mode="custom">Personalizado</button>
+        </div>
+
+        <div class="phase-display">
+          <span id="currentPhaseLabel">Foco</span>
+        </div>
+
+        <div class="timer-display">
+          <span id="timeDisplay">25:00</span>
+        </div>
+
+        <div class="timer-controls">
+          <button id="startPauseBtn" class="btn primary">Iniciar</button>
+          <button id="resetBtn" class="btn">Reiniciar</button>
+        </div>
+
+        <div class="progress-info">
+          <span id="cycleInfo">Ciclo 1 • Pomodoros concluídos: 0</span>
+        </div>
+
+        <details class="settings">
+          <summary>Configurações avançadas</summary>
+          <form id="configForm">
+            <div class="grid-3">
+              <label>
+                Foco (min)
+                <input type="number" id="focusMinutes" min="1" value="25" />
+              </label>
+              <label>
+                Pausa curta (min)
+                <input type="number" id="shortBreakMinutes" min="1" value="5" />
+              </label>
+              <label>
+                Pausa longa (min)
+                <input type="number" id="longBreakMinutes" min="0" value="15" />
+              </label>
+            </div>
+            <div class="grid-2">
+              <label>
+                Intervalo para pausa longa
+                <input type="number" id="longBreakInterval" min="0" value="4" />
+              </label>
+              <label class="checkbox-inline">
+                <input type="checkbox" id="autoStartNext" checked />
+                Iniciar próximo ciclo automaticamente
+              </label>
+            </div>
+            <div class="grid-2">
+              <label class="checkbox-inline">
+                <input type="checkbox" id="soundEnabled" checked />
+                Som ao finalizar sessão
+              </label>
+              <label class="checkbox-inline">
+                <input type="checkbox" id="notifyEnabled" />
+                Notificações do sistema
+              </label>
+            </div>
+          </form>
+        </details>
+      </section>
+
+      <!-- Coluna Tarefas & Estatísticas -->
+      <section class="side-column">
+        <!-- Tarefas -->
+        <section class="card">
+          <header class="card-header">
+            <h2>Tarefas</h2>
+          </header>
+
+          <form id="taskForm" class="task-form">
+            <input
+              type="text"
+              id="taskTitle"
+              placeholder="O que você vai fazer?"
+              required
+            />
+            <input
+              type="number"
+              id="taskEstimate"
+              min="1"
+              max="12"
+              value="1"
+              title="Estimativa em pomodoros"
+            />
+            <button type="submit" class="btn small primary">Adicionar</button>
+          </form>
+
+          <ul id="taskList" class="task-list"></ul>
+
+          <div class="task-footer">
+            <button id="clearDoneTasks" class="btn small ghost">
+              Limpar concluídas
+            </button>
+          </div>
+        </section>
+
+        <!-- Estatísticas -->
+        <section class="card">
+          <header class="card-header">
+            <h2>Estatísticas de Hoje</h2>
+          </header>
+          <div class="stats">
+            <div class="stat-item">
+              <span class="stat-label">Tempo de foco</span>
+              <span class="stat-value" id="statFocusTime">0 min</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-label">Sessões de foco</span>
+              <span class="stat-value" id="statFocusSessions">0</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-label">Pausas curtas</span>
+              <span class="stat-value" id="statShortBreaks">0</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-label">Pausas longas</span>
+              <span class="stat-value" id="statLongBreaks">0</span>
+            </div>
+          </div>
+          <button id="resetStats" class="btn small ghost">
+            Resetar estatísticas de hoje
+          </button>
+        </section>
+      </section>
+    </main>
+
+    <footer class="app-footer">
+      <small>
+        Página – Pomodoro • Feito para estudo & trabalho focado • Dados salvos
+        localmente (localStorage)
+      </small>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
